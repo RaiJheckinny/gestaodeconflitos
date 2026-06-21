@@ -1,9 +1,7 @@
 package com.pipocaagil.feedback.controller;
 
 import com.pipocaagil.feedback.service.UserService;
-import com.pipocaagil.feedback.users.dto.CreateUserDto;
-import com.pipocaagil.feedback.users.dto.LoginUserDto;
-import com.pipocaagil.feedback.users.dto.RecoveryJwtTokenDto;
+import com.pipocaagil.feedback.users.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +24,13 @@ public class UserController {
     public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
         userService.createUser(createUserDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/perfil")
+    public ResponseEntity<RecoveryUserDto> getUser(@RequestBody EmailUserDTO emailUserDTO) {
+        RecoveryUserDto recoveryUserDto = userService.getUser(emailUserDTO);
+
+        return new ResponseEntity<>(recoveryUserDto, HttpStatus.OK);
     }
 
     @GetMapping("/test")
