@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class UserService {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         User user = userRepository.findByEmail(loginUserDto.email()).orElse(null);
-        user.setLast_accessed(LocalDateTime.now());
+        user.setLast_accessed(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
         userRepository.save(user);
 
@@ -66,7 +67,7 @@ public class UserService {
                 .url_photo("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
                 .name(createUserDto.name())
                 .department(createUserDto.department())
-                .last_accessed(LocalDateTime.now())
+                .last_accessed(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")))
                 // Atribui ao usuário uma permissão específica
                 .roles(List.of(Role.builder().name(createUserDto.role()).build()))
                 .build();
