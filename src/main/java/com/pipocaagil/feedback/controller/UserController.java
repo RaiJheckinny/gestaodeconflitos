@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/perfil")
-    public ResponseEntity<RecoveryUserDto> getUser(@RequestBody EmailUserDTO emailUserDTO) {
+    public ResponseEntity<RecoveryUserDto> getUser(EmailUserDTO emailUserDTO) {
         RecoveryUserDto recoveryUserDto = userService.getUser(emailUserDTO);
 
         return new ResponseEntity<>(recoveryUserDto, HttpStatus.OK);
